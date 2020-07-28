@@ -5,8 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LINQTest01"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="LINQ Test" Height="450" Width="800"
+        WindowState="Maximized">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
 
+        <StackPanel Grid.Row="0">
+            <Button Name="ButtonAll" Content="Show all data" Width="150" HorizontalAlignment="Left"
+                    Margin="10"
+                    Click="ButtonAll_Click" />
+
+            <Button Name="ButtonFilter" Content="Show all filtered data" Width="150" HorizontalAlignment="Left"
+                    Margin="10"
+                    Click="ButtonFilter_Click" />
+            
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="First name: " Margin="10" />
+                <TextBox Name="TextBoxFirstName" Width="150" Margin="10" />
+                <Button Name="ButtonFilterFirstName" Content="Show filtered data" Width="150" HorizontalAlignment="Left"
+                        Margin="10"
+                        Click="ButtonFilterFirstName_Click" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Last name: " Margin="10" />
+                <TextBox Name="TextBoxLastName" Width="150" Margin="10" />
+                <Button Name="ButtonFilterLastName" Content="Show filtered data" Width="150" HorizontalAlignment="Left"
+                        Margin="10"
+                        Click="ButtonFilterLastName_Click" />
+            </StackPanel>
+        </StackPanel>
+
+        <DataGrid Name="GridResult"
+                  FontFamily="Courier New" FontSize="18"
+                  Grid.Row="1" />
     </Grid>
 </Window>

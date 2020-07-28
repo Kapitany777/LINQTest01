@@ -20,9 +20,60 @@ namespace LINQTest01
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<Person> persons;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            persons = Person.GetSampleData();
+        }
+
+        private void ButtonAll_Click(object sender, RoutedEventArgs e)
+        {
+            var result =
+                from person in persons
+                orderby person.FirstName,
+                        person.LastName
+                select person;
+
+            GridResult.ItemsSource = result;
+        }
+
+        private void ButtonFilterFirstName_Click(object sender, RoutedEventArgs e)
+        {
+            var result =
+                from person in persons
+                where person.FirstName.ToUpper().Contains(TextBoxFirstName.Text.ToUpper())
+                orderby person.FirstName,
+                        person.LastName
+                select person;
+
+            GridResult.ItemsSource = result;
+        }
+
+        private void ButtonFilterLastName_Click(object sender, RoutedEventArgs e)
+        {
+            var result =
+                persons
+                .Where(person => person.LastName.ToUpper().Contains(TextBoxLastName.Text.ToUpper()))
+                .OrderBy(person => person.FirstName)
+                .ThenBy(person => person.LastName);
+
+            GridResult.ItemsSource = result;
+        }
+
+        private void ButtonFilter_Click(object sender, RoutedEventArgs e)
+        {
+            var result =
+                from person in persons
+                where person.FirstName.ToUpper().Contains(TextBoxFirstName.Text.ToUpper())
+                   && person.LastName.ToUpper().Contains(TextBoxLastName.Text.ToUpper())
+                orderby person.FirstName,
+                        person.LastName
+                select person;
+
+            GridResult.ItemsSource = result;
         }
     }
 }
